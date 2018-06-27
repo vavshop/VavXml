@@ -1,0 +1,49 @@
+* {padding: 0; margin: 0;}
+body {background: #fff; font-family: Arial, sans-serif;}
+.wrapper {width: 21cm; min-height: 29.7cm; padding: 40px; margin: 0 auto; }
+h1 {color: #babac7; font-size: 24px; text-transform: uppercase;}
+
+
+.contacts_comp {margin-left: 270px; position: absolute; margin-top: 15px; font-size: 16px;}
+.cont_comp {}
+
+.logo {margin-top: 20px;}
+.CompanyName {width: 200px; font-weight: bold; margin-top: 10px;}
+.email {width: 200px; margin-top: -16px;}
+.contacts {float: right; font-size: 16px;}
+.cont {margin-top: -190px;}
+
+
+.logo_client {margin-right: 250px; float: right; margin-top: -220px;}
+.p_info {font-size: 16px !important; margin-top: 20px;}
+.left {float: left;}
+.right {float: right;}
+.center {float: center; }
+
+.payments {margin-top: 40px; font-size: 16px !important;}
+
+.consumables {margin-top: 30px; font-size: 16px !important;}
+
+.consumables table td {vertical-align: bottom;}
+
+.itemText {margin-top: 10px;}
+
+.t_r {text-align: right;}
+.t_c {text-align: center;}
+.t_l {text-align: left;}
+
+
+.mainText {font-size: 18px; font-weight: normal; margin-top: 10px;}
+.subText {font-weight: normal; }
+table td .subText{ font-size: 14px;}
+
+.totals {margin-top: 40px;}
+.subtotal {font-size: 18px; font-size: 16px !important;}
+
+.subtotal p {margin-top: 10px;}
+
+.images {width: 100%; margin-top: 10px;}
+
+.footer {width: 100%; margin-top: 70px; font-size: 16px !important;}
+.elbottom{vertical-align:bottom;}
+.sign {width: 400px; font-size: 16px !important;}

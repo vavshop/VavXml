@@ -1,0 +1,66 @@
+{% extends 'layout.html' %}
+
+{% block custom-css %}
+    <!-- DataTable CSS -->
+    <link href= "/static/css/jquery.dataTables.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block custom-js %}
+    <!-- DataTable JS -->
+
+{% endblock %}
+
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+          <form method="GET" action="/eshopget" enctype="multipart/form-data">
+            {% csrf_token %}
+ <div>
+   <label for="file">Choose file to upload</label>
+   <input type="file" id="file" name="file" multiple>
+ </div>
+ <div>
+   <button>Submit</button>
+ </div>
+</form>
+            <table class="table table-striped" id="urls" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Назва</th>
+                        <th>Працює</th>
+                        <th>Портал</th>
+                        <th>Дії</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for u in urls %}
+                        <tr id="{{ u.id }}">
+                            <td>{{ u.id }}{{ u.name }}</td>
+                            <td>
+                                {% if u.in_process %}
+                                    <span id='inProcess' class="label label-success">Так</span>
+                                {% else %}
+                                    <span id='inProcess' class="label label-danger">Ні</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <span class="label label-info">{{ u.portal.name}}</span>
+                            </td>
+                            <td>
+                                {% if u.in_process %}
+                                    <button type="button" class="btn btn-primary fa fa-play" onclick='StartParse(this);' disabled></button>
+                                {% else %}
+                                    <button type="button" class="btn btn-primary fa fa-play" onclick='StartParse(this);'></button>
+                                {% endif %}
+                            </td>
+                        </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        <script>
+                $('#urls').DataTable();
+        </script>
+        </div>
+    </div>
+{% endblock %}

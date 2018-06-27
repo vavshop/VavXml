@@ -1,0 +1,15 @@
+User-agent: *
+
+Disallow: /auth
+Disallow: /staff
+Disallow: /company
+Disallow: /dashboard
+Disallow: /message
+Disallow: /protect
+Allow: /*.js
+Allow: /*.css
+Allow: /*.jpg
+Allow: /*.gif
+Allow: /*.png
+Host: https://alfaprotection.com/
+Sitemap: https://alfaprotection.com/sitemap.xls

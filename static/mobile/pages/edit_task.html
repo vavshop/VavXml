@@ -1,0 +1,168 @@
+
+<!-- We don't need full layout here, because this page will be parsed with Ajax-->
+
+<div class="pages">
+  <!-- Page, data-page contains page name-->
+  <div data-page="edit-task" class="page">
+    <!-- Top Navbar-->
+    <div class="navbar">
+      <div class="navbar-inner">
+          <div class="left"><a href="#" class="back link icon-only"> <i class="icon icon-back"></i></a></div>
+        <div class="center" id="edit_task_page_title">Edit task</div>
+        <div class="right">
+          <!-- Right link contains only icon - additional "icon-only" class-->
+          <a href="#" class="link icon-only open-panel"> <i class="fa fa-bars"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scrollable page content-->
+    <div class="page-content" style="padding-top: 40px;">
+      <form method="post" id="edit-task" action="/api/edit_task/" class="ajax-submit">
+        <div class="list-block inputs-list">
+        <ul>
+          <li>
+            <div class="item-content">
+              <div class="item-inner">
+                <div class="item-title floating-label" id="edit_task_name_title">Task name</div>
+                <div class="item-input item-input-field">
+                  <input name='task-name' id="edit_task_name" type="text" maxlength="200"  required>
+                </div>
+              </div>
+            </div>
+          </li>
+
+          <li class="row item-content">
+            <span class="col-10 t_c t_media"><i class="fa fa-user"></i></span>
+            <span class="col-90">
+              <a href="#" class="item-link smart-select" data-open-in="picker" data-picker-height="calc(100% - 120px)"  data-searchbar="true"  data-searchbar-placeholder="Search recipients">
+                <select name="recipients" id="edit_task_recipients" multiple="multiple">
+                </select>
+                <div class="item-content">
+                <div class="item-inner">
+                <div class="item-title" id="edit_task_recipients_title">Assigned to</div>
+                <div class="item-after" id="edit_task_recipients_after"></div></div>
+                </div>
+              </a>
+            </span>
+          </li>
+
+          <li class="row item-content">
+            <span class="col-10 t_c t_media"><i class="fa fa-eye"></i></span>
+            <span class="col-90">
+              <a href="#" class="item-link smart-select" data-open-in="picker"  data-searchbar="true" data-picker-height="calc(100% - 120px)" data-searchbar-placeholder="Search auditors">
+                <select name="auditors" id="edit_task_auditors" multiple="multiple">
+                </select>
+                <div class="item-content">
+                <div class="item-inner">
+                <div class="item-title" id="edit_task_auditors_title">Auditors</div>
+                <div class="item-after" id="edit_task_auditors_after"></div></div>
+                </div>
+              </a>
+            </span>
+          </li>
+
+          <li class="row item-content">
+            <span class="col-10 t_c t_media"><i class="fa fa-users"></i></span>
+            <span class="col-90">
+              <a href="#" class="item-link smart-select" data-open-in="picker"  data-searchbar="true" data-picker-height="calc(100% - 120px)" data-searchbar-placeholder="Search customers" data-picker-close-text="Close">
+                <select name="clients" id="edit_task_customers" multiple="multiple">
+                </select>
+                <div class="item-content">
+                <div class="item-inner">
+                <div class="item-title" id="edit_task_customers_title">Customers</div>
+                <div class="item-after" id="edit_task_customers_after"></div></div>
+                </div>
+              </a>
+            </span>
+          </li>
+
+    <div class="item-content" id="edit_task_reservationtime_title">Date period:</div>
+    <li>
+      <div class="item-content">
+        <div class="item-inner not-empty-state">
+          <div class="item-input item-input-field not-empty-state">
+            <input type="text" placeholder="Select date range" name="reservationtime" id="edit_task_reservationtime" class="not-empty-state">
+          </div>
+        </div>
+      </div>
+    </li>
+
+    <li>
+<label class="label-checkbox item-content">
+  <!-- Checked by default -->
+  <input type="checkbox" name="all-day" id="edit_task_all_day" checked="checked">
+  <div class="item-media">
+    <i class="icon icon-form-checkbox"></i>
+  </div>
+  <div class="item-inner">
+    <div class="item-title" id="edit_task_all-day-text">All Day</div>
+  </div>
+</label>
+</li>
+  <label class="item-content" id="edit_tak_time_period_title">Time period:</label>
+  <li>
+    <div class="item-content">
+      <div class="item-inner">
+        <div class="item-title floating-label" id="edit_task_start_time_title">Start time:</div>
+        <div class="item-input item-input-field">
+          <input id="edit-task-start-time" type="time" value="00:00">
+        </div>
+      </div>
+    </div>
+  </li>
+  <li>
+    <div class="item-content">
+      <div class="item-inner">
+        <div class="item-title floating-label" id="edit_task_end_time_title">End time:</div>
+        <div class="item-input item-input-field">
+          <input id="edit-task-end-time" type="time" value="23:59">
+        </div>
+      </div>
+    </div>
+  </li>
+
+    <li class="align-top">
+      <div class="item-content">
+        <div class="item-inner">
+          <div class="item-title floating-label" id="edit_task_description_title">Description</div>
+          <div class="item-input item-input-field">
+            <textarea name="task-description" id="edit_task_description" class="resizable"></textarea>
+          </div>
+        </div>
+      </div>
+    </li>
+
+        <li>
+          <div class="item-content">
+            <div class="item-inner">
+              <div class="item-title floating-label" id="edit_task_event_color_title">Choose event color:</div>
+              <div class="item-input item-input-field">
+                <select name="color" id="edit_task_event_color">
+                  <option value="#00c0ef" class="text-aqua">aqua</option>
+                  <option value="#0073b7" class="text-blue">blue</option>
+                  <option value="#3c8dbc" class="text-light-blue">light blue</option>
+                  <option value="#39cccc" class="text-teal">teal</option>
+                  <option value="#f39c12" class="text-yellow">yellow</option>
+                  <option value="#ff851b" class="text-orange">orange</option>
+                  <option value="#00a65a" class="text-green">green</option>
+                  <option value="#01ff70" class="text-lime">lime</option>
+                  <option value="#dd4b39" class="text-red">red</option>
+                  <option value="#605ca8" class="text-purple">purple</option>
+                  <option value="#f012be" class="text-fuchsia">fuchsia</option>
+                  <option value="#777" class="text-muted">muted</option>
+                  <option value="#001f3f" class="text-navy">navy</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </li>
+
+
+        </ul>
+        </div>
+        <p class="buttons-row"><button type="submit" id="edit_task_submite_value" class="button button-raised">Save</button></p>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,1011 @@
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Required meta tags-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!-- Color theme for statusbar -->
+    <meta name="theme-color" content="#2196f3">
+    <!-- Your app title -->
+    <title>YarnTeam</title>
+    <!-- Path to Framework7 Library CSS, Material Theme -->
+    <link rel="stylesheet" href="/static/mobile/css/framework7.material.min.css">
+    <!-- Path to Framework7 color related styles, Material Theme -->
+    <link rel="stylesheet" href="/static/mobile/css/framework7.material.colors.min.css">
+    <link rel="stylesheet" href="/static/mobile/css/font-awesome.min.css">
+    <link href="/static/new_design/fonts/style.css" rel="stylesheet">
+    <!-- Path to your custom app styles-->
+    <link rel="stylesheet" href="/static/mobile/css/my-app.css">
+    <!--Signature-->
+    <link rel="stylesheet" type="text/css" href="/static/mobile/css/jquery.signaturepad.css"/>
+
+    <link rel="stylesheet" type="text/css" href="/static/mobile/css/testdt/jquery.dataTables.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/mobile/css/testdt/responsive.dataTables.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/mobile/css/testdt/rowReorder.dataTables.min.css"/>
+    <!-- Morris -->
+    <link type="text/css" rel="stylesheet" href="/static/plugins/morris/morris.css">
+    <script>
+      var LANGUAGE_CODE = '{{LANGUAGE_CODE}}';
+    </script>
+  </head>
+  <body>
+      <!-- Views-->
+      <div class="views">
+        <!-- Your main view, should have "view-main" class-->
+        <div class="view view-main">
+
+          <!-- Pages, because we need fixed-through navbar and toolbar, it has additional appropriate classes-->
+          <div class="pages navbar-fixed toolbar-fixed">
+            <!-- Page, data-page contains page name-->
+            <div data-page="index" class="page">
+              <!-- Top Navbar. In Material theme it should be inside of the page-->
+              <div class="navbar">
+                <div class="navbar-inner">
+
+                  <div class="center">YarnTeam</div>
+                  <div class="right">
+                    <!-- Right link contains only icon - additional "icon-only" class-->
+                    <a href="#" class="link icon-only open-panel"> <i class="icon icon-bars"></i></a>
+                  </div>
+                </div>
+              </div>
+
+
+              <!-- Scrollable page content-->
+              <div class="page-content" style="padding-top: 40px;">
+                <p class="buttons-row theme-red">
+                  <a href="#" id="search_tasks" onclick="PopupTaskSearch();" class="button button-raised button-fill active"><i class="fa fa-search"></i> Search tasks</a>
+                  </p>
+                  <div id='hidden_search_task' name="hidden_search_task" class="list-block inputs-list hiddend">
+                  <form method="post" id="search-task" action="/api/search_task/" class="ajax-submit">
+                  <ul>
+                    <li>
+                      <label class="label-checkbox item-content">
+                        <!-- Checked by default -->
+                        <input type="checkbox" name="ignore-start" id="serch_task_ignore_start" checked="checked">
+                        <div class="item-media">
+                          <i class="icon icon-form-checkbox"></i>
+                        </div>
+                        <div class="item-inner">
+                          <div class="item-title" id="serch_task_ignore_start_text">Date ignore</div>
+                        </div>
+                      </label>
+                    </li>
+                    <div class="item-content" id="serch_task_date_start_title">Choose start date range:</div>
+                    <li>
+                      <div class="item-content">
+                        <div class="item-inner not-empty-state">
+                          <div class="item-input item-input-field not-empty-state">
+                            <input type="text" placeholder="Choose start date range" name="start_time" id="serch_task_start_date" class="not-empty-state">
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+
+                    <li>
+                      <label class="label-checkbox item-content">
+                        <!-- Checked by default -->
+                        <input type="checkbox" name="ignore-end" id="serch_task_ignore_end" checked="checked">
+                        <div class="item-media">
+                          <i class="icon icon-form-checkbox"></i>
+                        </div>
+                        <div class="item-inner">
+                          <div class="item-title" id="serch_task_ignore_end_text">Date ignore</div>
+                        </div>
+                      </label>
+                    </li>
+                    <div class="item-content" id="serch_task_end_time_title">Choose end date range:</div>
+                    <li>
+                      <div class="item-content">
+                        <div class="item-inner not-empty-state">
+                          <div class="item-input item-input-field not-empty-state">
+                            <input type="text" placeholder="Choose end date range" name="end_time" id="serch_task_end_time" class="not-empty-state">
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+
+                    <li>
+                      <label class="label-checkbox item-content">
+                        <!-- Checked by default -->
+                        <input type="checkbox" name="ignore-close" id="serch_task_ignore_close" checked="checked">
+                        <div class="item-media">
+                          <i class="icon icon-form-checkbox"></i>
+                        </div>
+                        <div class="item-inner">
+                          <div class="item-title" id="serch_task_ignore_close_text">Date ignore</div>
+                        </div>
+                      </label>
+                    </li>
+                    <div class="item-content" id="serch_task_close_time_text">Choose close date range:</div>
+                    <li>
+                      <div class="item-content">
+                        <div class="item-inner not-empty-state">
+                          <div class="item-input item-input-field not-empty-state">
+                            <input type="text" placeholder="Choose close date range" name="close_time" id="serch_task_close_time" class="not-empty-state">
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+
+                    <li class="row item-content">
+                      <span class="col-10 t_c t_media"><i class="fa fa-user"></i></span>
+                      <span class="col-90">
+                        <a href="#" class="item-link smart-select" data-open-in="picker" data-picker-height="calc(100% - 120px)" data-searchbar="true" data-searchbar-placeholder="Search users">
+                          <select name="recipients" id="serch_task_recipients" multiple="multiple">
+                          </select>
+                          <div class="item-content">
+                          <div class="item-inner">
+                          <div class="item-title" id="serch_task_recipients_title" onclick="fixsave('recipients')">Assigned to:</div>
+                          <div class="item-after" id="serch_task_recipients_after"></div></div>
+                          </div>
+                        </a>
+                      </span>
+                    </li>
+
+                    <li class="row item-content">
+                      <span class="col-10 t_c t_media"><i class="fa fa-eye"></i></span>
+                      <span class="col-90">
+                        <a href="#" class="item-link smart-select" data-open-in="picker">
+                          <select name="status-ids" id="serch_task_status_ids" multiple="multiple">
+                          </select>
+                          <div class="item-content">
+                          <div class="item-inner">
+                          <div class="item-title" id="serch_task_status_ids_title">Status</div>
+                          <div class="item-after" id="serch_task_status_ids_after"></div></div>
+                          </div>
+                        </a>
+                      </span>
+                    </li>
+
+                    <li>
+                      <div class="item-content">
+                        <div class="item-inner">
+                          <div class="item-title floating-label" id="serch_task_name_title">Task Title</div>
+                          <div class="item-input item-input-field">
+                            <input name='name' id="serch_task_name" type="text" maxlength="200">
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                  <div class="content-block">
+                    <p class="row">
+                      <span class="col-15"></span>
+                      <span class="col-70"><button type="submit" id="btn_search_task" class="button button-raised maxwidth button-fill color-orange button-round">Search</button></span>
+                      <span class="col-15"></span></p>
+                        <p class="row">
+                          <span class="col-15"></span>
+                          <span class="col-70"><a href="#" onclick="PopupTaskSearch()" id="btn_close_search_task" class="button button-raised">Close</a></span>
+                          <span class="col-15"></span></p>
+                </form>
+                </div>
+                <hr>
+                  </div>
+
+                  <div class="list-block accordion-list">
+                <div class="card" style="margin-bottom: 70px;">
+                  <div class="card-content">
+                    <div class="">
+                      <ul>
+                      <table id="tasks_table" name="tasks_table" class="display " cellspacing="0" width="100%">
+                      <thead>
+                          <tr>
+                              <th></th>
+
+                          </tr>
+                      </thead>
+                      <tfoot>
+                          <tr>
+                              <th>
+                                <span class="pull-right"></span>
+                                <span class="pull-right"></span>
+                              </th>
+                          </tr>
+                      </tfoot>
+                      <tbody>
+                      </tbody>
+                  </table>
+                </ul>
+                     </div>
+                  </div>
+                </div>
+                <!-- ul -->
+                  </div>
+
+              </div>
+              <!-- Floating Action Button -->
+              <a href="#" name="float_button_new_task" onclick="taskload(-1)" class="floating-button color-pink" >
+                <i class="icon icon-plus"></i>
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- add job Popup -->
+    <div class="popup popup-add-job">
+      <div class="view navbar-fixed">
+        <div class="pages">
+          <div class="page">
+            <div class="navbar">
+              <div class="navbar-inner">
+                <div class="center" id="job_title">{{_("Choose item")}}</div>
+              </div>
+            </div>
+            <div class="page-content">
+              <div class="content-block">
+                <div class="list-block inputs-list">
+                <ul>
+                  <li class="row item-content">
+                    <span class="col-10 t_c t_media"><i class="fa fa-users"></i></span>
+                    <span class="col-90">
+                      <a href="#" class="item-link smart-select" data-open-in="picker"  data-searchbar="true" data-picker-height="calc(100% - 120px)" data-searchbar-placeholder="Search customers" data-picker-close-text="Close">
+                        <select name="job_select" id="job_select">
+                        </select>
+                        <div class="item-content">
+                        <div class="item-inner">
+                        <div class="item-title" id="job_select_title">{{_("Items")}}</div>
+                        <div class="item-after" id="job_select_after"></div></div>
+                        </div>
+                      </a>
+                    </span>
+                  </li>
+
+
+              </ul>
+            </div>
+            <div class="content-block">
+              <p class="row">
+                <span class="col-15"></span>
+                <span class="col-70"><a href="#" onclick="AddJob()" id="btn_add_job" class="button button-fill color-orange button-round">{{_("add item")}}</a></span>
+                <span class="col-15"></span></p>
+                <p class="row">
+                  <span class="col-15"></span>
+                  <span class="col-70"><a href="#" onclick="NewJob()" id="btn_new_job" class="button button-fill color-green button-round">{{_("new item")}}</a></span>
+                  <span class="col-15"></span></p>
+                  <p class="row">
+                    <span class="col-15"></span>
+                    <span class="col-70"><a href="#" class="link close-popup button button-raised">{{_("Cancel")}}</a></span>
+                    <span class="col-15"></span></p>
+
+          </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+      <!-- end job Popup -->
+      <!-- change discount Popup -->
+    <div class="popup popup-discount">
+      <div class="view navbar-fixed">
+        <div class="pages">
+          <div class="page">
+            <div class="navbar">
+              <div class="navbar-inner">
+                <div class="center" id="job_title">{{_("Discount")}}</div>
+              </div>
+            </div>
+            <div class="page-content">
+              <div class="content-block">
+                <div class="list-block inputs-list">
+                <ul>
+                <li>
+                  <div class="item-content">
+
+
+                    <div class="item-inner not-empty-state">
+                      <div class="item-title label" id="job_select_title">{{_("Add discount")}}</div>
+                      <div class="item-input item-input-field not-empty-state">
+                          <input type="text" id='discount_val' value="">
+                      </div>
+
+                    </div>
+
+
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="content-block">
+              <p class="row no-gutter">
+                <span class="col-20"><input type="checkbox" id="discount_type" hidden></span>
+                <span class="col-30"><a id="discount_type_1" onclick="ChangeDiscount(0)" class="button button-raised"><span class="fa fa-usd"></span></a></span>
+                <span class="col-30"><a id="discount_type_2" onclick="ChangeDiscount(1)" class="button button-fill color-orange"><span class="fa fa-percent"></span></a></span>
+                <span class="col-20"></span></p>
+              <p class="row">
+                <span class="col-40"><a href="#" class="link close-popup button button-raised">{{_("Cancel")}}</a></span>
+                <span class="col-20"></span>
+                <span class="col-40"><a href="#" onclick="AddDiscount()" id="btn_add_job" class="button button-fill color-orange button-round">{{_("Change")}}</a></span></p>
+          </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+      <!-- end discount Popup -->
+      <!-- save item Popup -->
+    <div class="popup popup-use-inventory">
+      <div class="view navbar-fixed">
+        <div class="pages">
+          <div class="page">
+            <div class="navbar">
+              <div class="navbar-inner">
+                <div class="center" id="job_title">{{_("Please select the action ")}}</div>
+              </div>
+            </div>
+            <div class="page-content">
+              <div class="content-block">
+                <div class="list-block inputs-list">
+                <ul>
+                <li>
+                  <div class="item-content">
+                  <label class="label-checkbox item-content">
+                  <input type="checkbox" name="use_inventory" id="use_inventory" value="Use">
+                  <div class="item-media"><i class="icon icon-form-checkbox"></i></div>
+                  <div class="item-inner">
+                  <div class="item-title" id="is_storage">{{_("Use inventory")}}</div>
+                  </div>
+                  </label>
+
+
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="content-block">
+              <p class="row">
+                <span class="col-45"><a href="#" class="link close-popup button button-raised">{{_("Cancel")}}</a></span>
+                <span class="col-10"></span>
+                <span class="col-45"><a href="#" onclick="SaveEstimate(false, 'close')" id="btn_save_inv_est" class="button button-fill color-orange button-round">{{_("Save")}}</a></span></p>
+          </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+      <!-- end saveItem Popup -->
+      <!-- choose client Popup -->
+      <div class="popup popup-choose-client">
+      <div class="view navbar-fixed">
+        <div class="pages">
+          <div class="page">
+            <div class="navbar">
+              <div class="navbar-inner">
+                <div class="center" id="client_add_title">{{_("Add customer")}}</div>
+              </div>
+            </div>
+            <div class="toolbar tabbar">
+              <div class="toolbar-inner">
+                <a href="#tab1" class="active tab-link">{{_("New customer")}}</a>
+                <a href="#tab2" class="tab-link">{{_("Choose customer")}}</a>
+              </div>
+            </div>
+                <div class="tabs-swipeable-wrap swiper-container swiper-container-horizontal" style="padding-top: 20px;">
+                  <div class="tabs swiper-wrapper">
+                    <div id="tab1" class="page-content tab active swiper-slide swiper-slide-active" style="width: 320px;">
+                      <div class="content-block">
+                        <div class="content-block-title">{{_("Basic info")}}</div>
+                        <form method="post" id="add-new-client" action="" class="ajax-submit">
+                          <div class="list-block inputs-list">
+                          <ul>
+                            <li>
+                              <div class="item-content">
+                                <div class="item-media"><i class="fa fa-user"></i></div>
+                                <div class="item-inner">
+                                  <div class="item-title floating-label">{{_("First name")}}</div>
+                                  <div class="item-input item-input-field">
+                                    <input name='first_name' type="text" maxlength="30" placeholder="" class="" required>
+                                  </div>
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="item-content">
+                                <div class="item-media"><i class="fa fa-user"></i></div>
+                                <div class="item-inner">
+                                  <div class="item-title floating-label">{{_("Last name")}}</div>
+                                  <div class="item-input item-input-field">
+                                    <input name='last_name' type="text" maxlength="30" placeholder="" class="" required>
+                                  </div>
+                                </div>
+                              </div>
+                            </li>
+                          <li>
+                          <li>
+                            <div class="item-content">
+                              <div class="item-media"><i class="fa fa-mobile"></i></div>
+                              <div class="item-inner">
+                                <div class="item-title floating-label">{{_("Phone")}}</div>
+                                <div class="item-input item-input-field">
+                                  <input name='phone' type="tel" maxlength="20" placeholder="" class="" required>
+                                </div>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="item-content">
+                              <div class="item-media"><i class="fa fa-phone"></i></div>
+                              <div class="item-inner">
+                                <div class="item-title floating-label">{{_("Phone 2")}}</div>
+                                <div class="item-input item-input-field">
+                                  <input name='another_phone' type="tel" maxlength="20" placeholder="" class="">
+                                </div>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="item-content">
+                              <div class="item-media"><i class="fa fa-envelope-o"></i></div>
+                              <div class="item-inner">
+                                <div class="item-title floating-label">{{_("E-mail")}}</div>
+                                <div class="item-input item-input-field">
+                                  <input name='email' type="email" placeholder="" maxlength="200" class="">
+                                </div>
+                              </div>
+                            </div>
+                          </li>
+                          <li class="item-content">
+                            <div class="item-media"><i class="fa fa-sign-in"></i></div>
+                            <div class="item-inner">
+                              <div class="item-title floating-label">{{_("Came from")}}</div>
+                              <div class="item-input item-input-field">
+                                <input type="text" name='coming_from' maxlength="300" id="coming-from-ajax" class="">
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <a href="#" id="groups-ajax" class="item-link item-content autocomplete-opener">
+                              <input type="hidden" name='group_ids'>
+                              <div class="item-inner">
+                                <div class="item-title">{{_("Choose groups")}}</div>
+                                <div class="item-after"></div>
+                              </div>
+                            </a>
+                          </li>
+                          <li>
+                            <div class="item-content">
+                              <div class="item-media"><i class="fa fa-map-marker"></i></div>
+                              <div class="item-inner">
+                                <div class="item-title floating-label">{{_("Address")}}</div>
+                                <div class="item-input item-input-field">
+                                  <input type="text" name="address" maxlength="250" placeholder="" class="">
+                                </div>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="item-content">
+                              <div class="item-media"><i class="fa fa-map-marker"></i></div>
+                              <div class="item-inner">
+                                <div class="item-title floating-label">{{_("Address")}} 2</div>
+                                <div class="item-input item-input-field">
+                                  <input type="text" name="address2" maxlength="250" placeholder="" class="">
+                                </div>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="item-content">
+                              <div class="item-media"><i class="fa fa-map-marker"></i></div>
+                              <div class="item-inner">
+                                <div class="item-title floating-label">{{_("City")}}</div>
+                                <div class="item-input item-input-field">
+                                  <input type="text" name="city" maxlength="200" placeholder="">
+                                </div>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="item-content">
+                            <div class="item-media"><i class="fa fa-map-marker"></i></div>
+                            <div class="item-inner">
+                              <div class="item-title floating-label">{{_("State")}}</div>
+                              <div class="item-input item-input-field">
+                                <input type="text" name="state" maxlength="100" placeholder="">
+                              </div>
+                            </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="item-content">
+                            <div class="item-media"><i class="fa fa-map-marker"></i></div>
+                            <div class="item-inner">
+                              <div class="item-title floating-label">{{_("ZIP")}}</div>
+                              <div class="item-input item-input-field">
+                                <input type="text" name="zip_code" maxlength="5" placeholder="">
+                              </div>
+                            </div>
+                            </div>
+                          </li>
+                          <li class="align-top">
+                            <div class="item-content">
+                              <div class="item-media"><i class="icon icon-form-comment"></i></div>
+                              <div class="item-inner">
+                                <div class="item-title floating-label">{{_("Note")}}</div>
+                                <div class="item-input item-input-field">
+                                  <textarea name="note" class="resizable"></textarea>
+                                </div>
+                              </div>
+                            </div>
+                          </li>
+                          </ul>
+                          </div>
+                          <input type="hidden" name="token" value="">
+                        <p class="row buttons-row">
+                          <span class="col-40"><a href="#" class="link close-popup button button-raised">{{_("Cancel")}}</a></span>
+                          <span class="col-20"></span>
+                          <span class="col-40"><button type="submit" onclick="AddNewClient()" id="btn_save_new_client"  class="button button-fill color-green button-round">{{_("Save")}}</button></span></p>
+                        </form>
+                      </div>
+                    </div>
+                    <div id="tab2" class="page-content tab swiper-slide swiper-slide-next" style="width: 320px;">
+                      <div class="content-block">
+                        <div class="list-block inputs-list">
+                        <ul>
+                        <li class="row item-content">
+                          <span class="col-10 t_c t_media"><i class="fa fa-users"></i></span>
+                          <span class="col-90">
+                            <a href="#" class="item-link smart-select" data-open-in="picker"  data-searchbar="true" data-picker-height="calc(100% - 120px)" data-searchbar-placeholder="Search customers" data-picker-close-text="Close">
+                              <select name="clients" id="client_select">
+                              </select>
+                              <div class="item-content">
+                              <div class="item-inner">
+                              <div class="item-title" id="client_select_title">{{_("Customers")}}</div>
+                              <div class="item-after" id="client_select_after"></div></div>
+                              </div>
+                            </a>
+                          </span>
+                        </li>
+                        </ul>
+                      </div>
+                        <p class="row">
+                          <span class="col-40"><a href="#" class="link close-popup button button-raised">{{_("Cancel")}}</a></span>
+                          <span class="col-20"></span>
+                          <span class="col-40"><a href="#" onclick="AddChoosedClient()" id="btn_choose_client" class="button button-fill color-orange button-round">{{_("Save")}}</a></span></p>
+                      </div>
+                    </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      <!-- end choose client Popup -->
+      <!-- send email Popup -->
+    <div class="popup popup-send-pdf">
+      <div class="view navbar-fixed">
+        <div class="pages">
+          <div class="page">
+            <div class="navbar">
+              <div class="navbar-inner">
+                <div class="center" id="send_pdf_to_email_title">{{_("Send estimate to email")}}</div>
+              </div>
+            </div>
+            <div class="page-content">
+              <div class="content-block">
+                <div class="list-block inputs-list">
+                <ul>
+                <li>
+                  <div class="item-content">
+                    <div class="item-inner not-empty-state">
+                      <div class="item-title label">{{_("Email")}}:</div>
+                      <div class="item-input item-input-field not-empty-state">
+                          <input type="email" id='send_to_email' value="">
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="content-block">
+              <p class="row">
+                <span class="col-40"><a href="#" class="link close-popup button button-raised">{{_("Cancel")}}</a></span>
+                <span class="col-20"></span>
+                <span class="col-40"><a href="#" onclick="SendPdftoEmail()" id="btn_send_email" class="button button-fill color-orange button-round">{{_("Send ")}}</a></span></p>
+          </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+      <!-- end send email Popup -->
+      <!-- add invPay Popup -->
+      <div class="popup popup-add-pay">
+      <div class="view navbar-fixed">
+        <div class="pages">
+          <div class="page">
+            <div class="navbar">
+              <div class="navbar-inner">
+                <div class="center" id="inv_pay_title">{{_("Payments")}}</div>
+              </div>
+            </div>
+            <div class="toolbar tabbar">
+              <div class="toolbar-inner">
+                <a href="#pay1" class="active tab-link">{{_("Payments")}}</a>
+                <a href="#pay2" class="tab-link">{% trans "Add Payment" context "in paypent" %}</a>
+              </div>
+            </div>
+            <a href="#" class="link close-popup floating-close" style="position: absolute; rigth:0px; top:0px;"><i class="fa fa-times"></i></a>
+                <div class="tabs-swipeable-wrap swiper-container swiper-container-horizontal" style="padding-top: 20px;">
+                  <div class="card" style="padding-top: 80px;">
+                    <div class="card-content">
+                      <div class="card-content-inner">
+                        <div class="row no-gutter">
+                          <div class="col-30">{{_("Paid")}}</div>
+                          <div class="col-70 t_r" id="to_pay"> </div>
+                        </div>
+                          <div class="item-content">
+                            <div class="item-inner">
+                              <div data-progress="50" id="progress_bar"  class="progressbar color-amber"><span style="transform: translate3d(-50%, 0px, 0px);"></span></div>
+                            </div>
+                          </div>
+                      </div>
+                    </div>
+                    <div class="card-footer"><span id="inv_payed"></span> {{_("of")}} <span id="inv_total"></span></div>
+                  </div>
+                  <div class="tabs swiper-wrapper">
+                    <div id="pay1" class="page-content tab active swiper-slide swiper-slide-active" style="width: 320px; padding-top: 10px; height: 60%;">
+                      <div class="content-block">
+                        <div class="list-block inputs-list">
+                          <div id="body_payments"></div>
+                          <div  id="show_pay_info"></div>
+                        </div>
+                        <input type="hidden" name="token" value="">
+                        <p class="row buttons-row" style="margin-bottom: 65px;">
+                          <span class="col-70"></span>
+                          <span class="col-30"><a href="#" class="link close-popup button button-fill color-red button-raised">{{_("DONE")}}</a></span></p>
+                      </div>
+                    </div>
+                    <div id="pay2" class="page-content tab swiper-slide swiper-slide-next" style="width: 320px; padding-top: 0px; height: 60%;">
+                      <div class="content-block">
+                          <div class="item-content">
+                            <form class="list-block" id="form-payment" role="form" action="/api/payment/">
+                              <input type="hidden" name="iddd" id="est_id" value="">
+                              {{_("Payment")}}
+                              <ul>
+                                <div class="row no-gutter">
+                                  <li class="col-55">
+                                    <div class="item-content">
+                                      <div class="item-inner">
+                                        <div class="item-title floating-label" id="formGroupInputLargeTitle"><i class="fa fa-usd"></i></div>
+                                        <div class="item-input item-input-field">
+                                          <input name='formGroupInputLarge' id="formGroupInputLarge" type="text">
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </li>
+                                  <li class="col-45">
+                                    <a href="#" class="item-link smart-select" data-open-in="picker">
+                                    <select name="mac-windows" id="pay_sel" class="not-empty-state">
+                                      <option value="1" selected="selected">$</option>
+                                      <option value="2">%</option>
+                                      <option value="3">{% trans "Full" context "in payment" %}</option>
+                                    </select>
+                                    <div class="item-content">
+                                    <div class="item-inner">
+                                    <div class="item-after">$</div></div>
+                                    </div></a>
+                                  </li>
+
+                                </div>
+                                <li>
+                                  <div class="item-content">
+                                    <div class="item-media"><i class="fa fa-calendar"></i></div>
+                                    <div class="item-inner">
+                                      <div class="item-title label">{% trans "Payment date" context "in payment" %}</div>
+                                      <div class="item-input">
+                                        <input type="date" id="new_pay_day" placeholder="Payment date" value="2014-04-30">
+                                      </div>
+                                    </div>
+                                  </div>
+                                </li>
+                                <li>
+                                  <div class="item-content">
+                                  <div class="item-inner">
+                                  <div class="item-title label" id="title_pay_method">{% trans "Payment Method" context "in payment" %}</div>
+                                  <div class="item-input">
+                                  <select id="pay_method">
+                                       <option value="1">{{_("Cash")}}</option>
+                                       <option value="2">{{_("Check")}}</option>
+                                       <option value="3">{{_("Credit")}}</option>
+                                  </select>
+                                  </div>
+                                  </div>
+                                  </div>
+                                </li>
+                                <li id="chek_li" style="display: none;">
+                                  <div class="item-content">
+                                    <div class="item-inner">
+                                      <div class="item-title floating-label">{{_("Check number")}}</div>
+                                      <div class="item-input item-input-field">
+                                        <input name="num_chek" type="number" min="1">
+                                      </div>
+                                    </div>
+                                  </div>
+                                </li>
+                              </ul>
+
+                            <p class="row">
+                              <span class="col-35"><a href="#" class="link close-popup button button-fill color-gray button-raised">{{_("Close")}}</a></span>
+                              <span class="col-35"></span>
+                              <span class="col-30"><button type="submit" id="add_pay_knwev" class="button button-fill color-red button-round">{% trans "ADD" context "in payment" %}</button></span></p>
+                           </form>
+                          </div>
+
+                      </div>
+                     </div>
+                    </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      <!-- end invPay Popup -->
+
+
+
+
+      <div class="login-screen">
+        <div class="view">
+          <div class="page">
+            <div class="page-content login-screen-content">
+              <div class="login-screen-title">YarnTeam</div>
+              <form method="post" id="login-form" action="/api/authweb/" class="ajax-submit">
+                <div class="list-block">
+                  <ul>
+                    <li class="item-content">
+                      <div class="item-inner">
+                        <div class="item-title label">{{_("User name")}}</div>
+                        <div class="item-input">
+                          <input type="text" name="username" placeholder="{{_("Email")}}">
+                        </div>
+                      </div>
+                    </li>
+                    <li class="item-content">
+                      <div class="item-inner">
+                        <div class="item-title label">{{_("Password")}}</div>
+                        <div class="item-input">
+                          <input type="password" name="password" placeholder="{{_("Password")}}">
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+                <div class="list-block">
+                  <ul>
+                    <li>
+                      <div class="row">
+                        <div class="col-40" ></div>
+                        <div class="col-30" >
+                          <button type="submit" class="button button-raised center">{{_("Sign In")}}</button>
+                        </div>
+                        <div class="col-30" ></div>
+                      </div>
+                    </li>
+                  </ul>
+                  <div class="list-block-label">
+                    <!--<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    <p><a href="#" class="close-login-screen">Close Login Screen</a></p>-->
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+    <!-- Panels Overlay -->
+ <div class="panel-overlay"></div>
+
+ <!-- Left Panel with Reveal effect -->
+ <div class="panel panel-left panel-reveal menu">
+   <div class="content-block">
+     <div class="user-panel">
+       <div class="content">
+         <div class="row">
+           <div class="col-50" id="avatar_menu_div"><img id="avatar_menu" src="/static/mobile/img/ico96.png" style="margin-left: 15px;" class="t_c profile-user-img img-responsive img-circle" width="90" height="90"></div>
+           <div class="col-50">
+             <div class="row">
+                 <div class="col-100 t_r"><p id='name_info'> </p></div>
+             </div>
+             <div class="row">
+                 <div class="col-100 t_r"><p id='position_info'> </p></div>
+             </div>
+           </div>
+         </div>
+         <hr>
+         {% csrf_token %}
+         <div class="row">
+          <div class="col-100"><center>
+           {{_("Languages")}}
+          </center></div>
+         {% if request.get_full_path %}
+           {% if LANGUAGE_CODE == 'en-us' %}
+            <div class="col-10"></div><div class="col-40">
+               <a href="#" class="lang_active" onclick="ChangeLangvich('en-us','{{request.get_full_path}}')">EN</a>
+            </div>
+            <div class="col-40 t_r">
+               <a href="#" onclick="ChangeLangvich('ru','{{request.get_full_path}}')">RU</a>
+            </div><div class="col-10"></div>
+           {% else %}
+            <div class="col-10"></div><div class="col-40">
+               <a href="#" onclick="ChangeLangvich('en-us','{{request.get_full_path}}')">EN</a>
+           </div>
+            <div class="col-40 t_r">
+               <a href="#" class="lang_active" onclick="ChangeLangvich('ru','{{request.get_full_path}}')">RU</a>
+            </div><div class="col-10"></div>
+           {% endif %}
+         {%else%}
+           {% if LANGUAGE_CODE == 'en-us' %}
+            <div class="col-10"></div><div class="col-40">
+               <a class="lang_active">EN</a>
+            </div><div class="col-50"></div>
+           {% else %}
+            <div class="col-50"></div>
+            <div class="col-40 t_r"><a class="lang_active">RU</a></div><div class="col-10"></div>
+           {% endif %}
+         {% endif %}
+         </div>
+         <hr>
+     <div class="content-block-title row"><div class="col-50">{{_("Menu")}}</div><div class="col-50 t_r"><a onclick="MenuOpen()"><i class="fa fa-cog" aria-hidden="true"></i></a></div></div>
+      <div class="list-block">
+        <ul class="menu">
+          <div id="menu_settings" class='hiddend'>
+            <li class="item-content">
+              <a href="#" id="menu_user_settings" onclick='myApp.mainView.reloadPage(pages_url+"/pages/company_info.html");' class="link close-panel item-content">
+                <div class="item-media"><i class="fa fa-cogs" aria-hidden="true"></i></div>
+                <div class="item-inner">{{_("Settings")}}</div>
+              </a>
+            </li>
+            <li class="item-content">
+              <a href="#" id="menu_support" onclick='myApp.mainView.reloadPage(pages_url+"/pages/support.html");' class="link close-panel item-content">
+                <div class="item-media"><i class="fa fa-envelope-square" aria-hidden="true"></i></div>
+                <div class="item-inner">{{_("Support")}}</div>
+              </a>
+            </li>
+            <li class="item-content">
+              <a href="#" onclick='LogOut()' class="link close-panel item-content">
+                <div class="item-media"><i class="fa fa-window-close-o" aria-hidden="true"></i></div>
+                <div class="item-inner">{{_("Exit")}}</div>
+              </a>
+            </li>
+            <hr>
+          </div>
+          <li class="item-content" id="menu_dashboard">
+            <a href="#" onclick='myApp.mainView.reloadPage(pages_url+"/pages/dashboard.html");' class="link close-panel item-content">
+              <div class="item-media"><i class="fa fa-trello" aria-hidden="true"></i></div>
+              <div class="item-inner">{{_("Dashboard")}}</div>
+            </a>
+          </li>{%if 1 == 2%}
+          <li class="item-content">
+            <a href="#" onclick='myApp.mainView.reloadPage(pages_url+"/pages/orders.html");' class="link close-panel item-content">
+              <div class="item-media"><i class="fa fa-file-text-o" aria-hidden="true"></i></div>
+              <div class="item-inner">{{_("Orders")}}</div>
+            </a>
+          </li>{%endif%}
+          <li class="item-content">
+            <a href="#" onclick='myApp.mainView.reloadPage(pages_url+"/pages/invoices.html");' class="link close-panel item-content">
+              <div class="item-media"><i class="fa fa-file-text-o" aria-hidden="true"></i></div>
+              <div class="item-inner">{{_("Invoices")}}</div>
+            </a>
+          </li>
+          <li class="item-content">
+            <a href="#" onclick='myApp.mainView.reloadPage(pages_url+"/pages/estimates.html");' class="link close-panel item-content">
+              <div class="item-media"><i class="fa fa-file-text" aria-hidden="true"></i></div>
+              <div class="item-inner">{{_("Estimates")}}</div>
+            </a>
+          </li>
+          <li class="item-content">
+            <a href="#" onclick="myApp.mainView.reloadPage(pages_url+'/pages/clients.html');" class="link close-panel item-content">
+              <div class="item-media"><i class="fa fa-users" aria-hidden="true"></i></div>
+              <div class="item-inner">{{_("Customers")}}</div>
+            </a>
+          </li>
+          <li class="item-content" id='main_payments'>
+            <a href="#" onclick="myApp.mainView.reloadPage(pages_url+'/pages/payments.html');" class="link close-panel item-content">
+              <div class="item-media"><i class="fa fa-shopping-basket" aria-hidden="true"></i></div>
+              <div class="item-inner">{{_("Payments")}}</div>
+            </a>
+          </li>
+          <li class="item-content" id='main_users'>
+            <a href="#" onclick='myApp.mainView.reloadPage(pages_url+"/pages/workers.html");' class="link close-panel item-content">
+              <div class="item-media"><i class="fa fa-user-circle-o" aria-hidden="true"></i></div>
+              <div class="item-inner">{{_("Users")}}</div>
+            </a>
+          </li>
+          <li class="item-content" id='main_storage'>
+            <a href="#" onclick='myApp.mainView.reloadPage(pages_url+"/pages/storage.html");' class="link close-panel item-content">
+              <div class="item-media"><i class="fa fa-caret-square-o-down" aria-hidden="true"></i></div>
+              <div class="item-inner">{{_("Storage")}}</div>
+            </a>
+          </li>
+          <li class="item-content" id='main_item'>
+            <a href="#" onclick='myApp.mainView.reloadPage(pages_url+"/pages/items.html");' class="link close-panel item-content">
+              <div class="item-media"><i class="fa fa-tag" aria-hidden="true"></i></div>
+              <div class="item-inner">{{_("Items")}}</div>
+            </a>
+          </li>
+          <li class="item-content">
+            <a href="#" onclick='myApp.mainView.reloadPage(pages_url+"/index2.html");' class="link close-panel item-content">
+              <div class="item-media"><i class="fa fa-calendar-minus-o" aria-hidden="true"></i></div>
+              <div class="item-inner">{{_("Tasks")}}</div>
+            </a>
+          </li>
+          <li class="item-content">
+            <a href="#" onclick='myApp.mainView.reloadPage(pages_url+"/pages/messager.html");' class="link close-panel item-content">
+              <div class="item-media"><i class="fa fa-comments-o" aria-hidden="true"></i></div>
+              <div class="item-inner">{{_("Chat")}}</div>
+            </a>
+          </li>
+        <!--  <li class="item-content">
+            <a href="#" onclick='localStorage.removeItem("token"); window.location = pages_url.split("static")[0]+"mobile";' class="link close-panel item-content">
+              <div class="item-media"><i class="material-icons">exit_to_app</i></div>
+              <div class="item-inner">{{_("Exit")}}</div>
+            </a>
+          </li>
+          <li class="item-content">
+            <div class="item-inner">
+              <div class="item-title">Item with badge</div>
+            </div>
+          </li>
+          <li class="item-content">
+            <div class="item-inner">
+              <div class="item-title">Another item</div>
+            </div>
+          </li>-->
+        </ul>
+      </div>
+     <!-- Click on link with "close-panel" class will close panel -->
+     <p>
+       </p>
+   </div>
+ </div>
+    <script src="/static/mobile/js/jQuery-2.1.4.min.js"></script>
+    <!-- jQuery Validation 1.14 -->
+    <script src="/static/js/jquery.validate.min.js" type="text/javascript"></script>
+    <!-- js_translate_catalog -->
+    <script type="text/javascript" src="{% url 'django.views.i18n.javascript_catalog' %}"></script>
+    <!-- Path to Framework7 Library JS-->
+    <script type="text/javascript" src="/static/mobile/js/framework7.min.js"></script>
+    <script type="text/javascript" src="/static/mobile/js/moment.min.js"></script>
+    <script type="text/javascript" src="/static/mobile/js/tools.js"></script>
+    <script src='/static/mobile/js/autosize.min.js'></script>
+    <!-- app js-->
+    <script type="text/javascript" src="/static/mobile/js/invoices.js"></script>
+    <script type="text/javascript" src="/static/mobile/js/tasks.js"></script>
+    <!-- app js-->
+    <script type="text/javascript" src="/static/mobile/js/my-app.js"></script>
+    <script type="text/javascript" src="/static/mobile/js/jquery.signaturepad.min.js"></script>
+
+   <script src="/static/new_design/js/morris.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+
+    <script type="text/javascript" src="/static/mobile/js/datatables.min.js"></script>
+    <script type="text/javascript" src="/static/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="/static/new_design/fonts/liga.js" type="text/javascript"></script>
+    <!-- ws4redis -->
+    <script src="/static/plugins/ws4redist/js/ws4redis.js" type="text/javascript"></script>
+    <script>
+      {%if message %}
+      myApp.addNotification({
+          title: gettext('Success'),
+          message: "{{message}}",
+      });
+      {%endif%}
+    </script>
+  </body>
+</html>

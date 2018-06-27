@@ -1,0 +1,202 @@
+
+
+<!-- We don't need full layout here, because this page will be parsed with Ajax-->
+<div class="pages">
+  <!-- Page, data-page contains page name-->
+  <div data-page="orders" class="page">
+    <!-- Top Navbar-->
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="left">
+          <!-- Right link contains only icon - additional "icon-only" class-->
+          <!-- <a href="pages/new_client.html" class="link icon-only"> <i class="fa fa-plus"></i></a> -->
+        </div>
+        <div class="center sliding" id="orders_page_title">Orders</div>
+        <div class="right">
+          <!-- Right link contains only icon - additional "icon-only" class-->
+          <a href="#" class="link icon-only open-panel"> <i class="fa fa-bars"></i></a>
+        </div>
+      </div>
+    </div>
+
+
+
+    <!-- Scrollable page content-->
+    <div class="page-content orders" style="padding-top: 40px;">
+      <!-- search -->
+      <p class="buttons-row theme-red">
+        <a href="#" id="search_payments" onclick="PopupTaskSearch();" class="button button-raised button-fill active"><i class="fa fa-search"></i> Search payments</a>
+        </p>
+        <div name="hidden_search_task" class="list-block inputs-list hiddend">
+        <form method="post" id="search-payments" action="/api/search_payments/" class="ajax-submit">
+        <ul>
+          <li class="row item-content">
+            <span class="col-10 t_c t_media"><i class="fa fa-file-text-o" aria-hidden="true"></i></span>
+            <span class="col-90">
+              <a href="#" class="item-link smart-select" data-open-in="picker" data-picker-height="calc(100% - 120px)" data-searchbar="true" data-searchbar-placeholder="Search invoice" data-picker-close-text="Close">
+                <select name="invoice_number" id="serch_paiments_invoice_num" multiple="multiple">
+                </select>
+                <div class="item-content">
+                <div class="item-inner">
+                <div class="item-title" id="serch_paiments_invoice_num_title">Invoice #</div>
+                <div class="item-after" id="serch_paiments_invoice_num_after"></div></div>
+                </div>
+              </a>
+            </span>
+          </li>
+
+          <li class="row item-content">
+            <span class="col-10 t_c t_media"><i class="fa fa-user"></i></span>
+            <span class="col-90">
+              <a href="#" class="item-link smart-select" data-open-in="picker" data-picker-height="calc(100% - 120px)" data-searchbar="true" data-searchbar-placeholder="Search accepted" data-picker-close-text="Close">
+                <select name="accepted" id="serch_payments_accepted" multiple="multiple">
+                </select>
+                <div class="item-content">
+                <div class="item-inner">
+                <div class="item-title" id="serch_payments_accepted_title">Accepted By</div>
+                <div class="item-after" id="serch_payments_accepted_after"></div></div>
+                </div>
+              </a>
+            </span>
+          </li>
+
+          <li class="row item-content">
+            <span class="col-10 t_c t_media"><i class="fa fa-users"></i></span>
+            <span class="col-90">
+              <a href="#" class="item-link smart-select" data-open-in="picker" data-picker-height="calc(100% - 120px)" data-searchbar="true" data-searchbar-placeholder="Search customers" data-picker-close-text="Close">
+                <select name="client-id" id="serch_payments_customers" multiple="multiple">
+                </select>
+                <div class="item-content">
+                <div class="item-inner">
+                <div class="item-title" id="serch_payments_customers_title">Customers</div>
+                <div class="item-after" id="serch_payments_customers_after"></div></div>
+                </div>
+              </a>
+            </span>
+          </li>
+
+          <li class="row item-content">
+            <span class="col-100">
+              <a href="#" class="item-link smart-select" data-open-in="picker" data-picker-height="200px">
+                <select name="payment-metod" id="serch_payments_payment_method" multiple="multiple">
+                </select>
+                <div class="item-content">
+                <div class="item-inner">
+                <div class="item-title" id="serch_payments_payment_method_title">Payment Method</div>
+                <div class="item-after" id="serch_payments_payment_method_after"></div></div>
+                </div>
+              </a>
+            </span>
+          </li>
+
+          <li>
+            <div class="item-content">
+              <div class="item-inner">
+                <div class="item-title floating-label" id="serch_payment_price_title"><i class="fa fa-usd" aria-hidden="true"></i> Amount</div>
+                <div class="item-input item-input-field">
+                  <input name='payment-price' id="serch_payment_price" type="text" maxlength="200">
+                </div>
+              </div>
+            </div>
+          </li>
+
+          <li class="row item-content">
+            <span class="col-10 t_c t_media"><i class="fa fa-usd" aria-hidden="true"></i></span>
+            <span class="col-90">
+              <a href="#" class="item-link smart-select" data-open-in="picker" data-picker-height="200px">
+                <select name="p-price" id="serch_payments_p_price">
+                </select>
+                <div class="item-content">
+                <div class="item-inner">
+                <div class="item-title" id="serch_payments_p_price_title">Amount is</div>
+                <div class="item-after" id="serch_payments_p_price_after"></div></div>
+                </div>
+              </a>
+            </span>
+          </li>
+
+          <li class="row item-content">
+            <span class="col-100">
+              <a href="#" class="item-link smart-select" data-open-in="picker" data-picker-height="200px">
+                <select name="active-refund" id="serch_payments_active_refound">
+                </select>
+                <div class="item-content">
+                <div class="item-inner">
+                <div class="item-title" id="serch_payments_active_refound_title">Status</div>
+                <div class="item-after" id="serch_payments_active_refound_after"></div></div>
+                </div>
+              </a>
+            </span>
+          </li>
+
+
+          <li>
+            <label class="label-checkbox item-content">
+              <!-- Checked by default -->
+              <input type="checkbox" name="ignore-date" id="serch_payments_ignore_date" checked="checked">
+              <div class="item-media">
+                <i class="icon icon-form-checkbox"></i>
+              </div>
+              <div class="item-inner">
+                <div class="item-title" id="serch_payments_ignore_date_text">Date ignore</div>
+              </div>
+            </label>
+          </li>
+          <div class="item-content" id="serch_payments_date_range_title">Date:</div>
+          <li>
+            <div class="item-content">
+              <div class="item-inner not-empty-state">
+                <div class="item-input item-input-field not-empty-state">
+                  <input type="text" placeholder="Choose date range" name="date-range" id="serch_payments_date_range" class="not-empty-state">
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+        <div class="content-block">
+          <p class="row">
+            <span class="col-15"></span>
+            <span class="col-70"><button type="submit" id="btn_search_payments" class="button button-raised maxwidth button-fill color-orange button-round">Search</button></span>
+            <span class="col-15"></span></p>
+              <p class="row">
+                <span class="col-15"></span>
+                <span class="col-70"><a href="#search_payments" onclick="PopupTaskSearch()" id="btn_close_search_payments" class="button button-raised">Close</a></span>
+                <span class="col-15"></span></p>
+      </form>
+      </div>
+      <hr>
+        </div>
+        <!--end search -->
+
+      <div class="list-block media-list">
+    <div class="card">
+      <div class="card-content">
+        <div class="">
+          <ul>
+          <table id="orders" class="display nowrap" cellspacing="0" width="100%">
+          <thead>
+              <tr>
+                  <th></th>
+
+              </tr>
+          </thead>
+          <tfoot>
+              <tr>
+                  <th>
+                    <span class="pull-right"></span>
+                    <span class="pull-right"></span>
+                  </th>
+              </tr>
+          </tfoot>
+          <tbody>
+          </tbody>
+      </table>
+    </ul>
+         </div>
+      </div>
+    </div>
+    <!-- ul -->
+      </div>
+    </div>
+  </div>
+</div>

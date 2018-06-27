@@ -1,0 +1,234 @@
+
+<!-- We don't need full layout here, because this page will be parsed with Ajax-->
+<div class="pages">
+  <!-- Page, data-page contains page name-->
+  <div data-page="invoice" class="page">
+    <!-- Top Navbar-->
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="left"><a href="#" class="back link icon-only"> <i class="icon icon-back"></i></a></div>
+        <div class="center" id="title_invoice"><i class="fa fa-refresh" aria-hidden="true"></i> </div>
+        <div class="right">
+          <!-- Right link contains only icon - additional "icon-only" class-->
+          <a href="#" class="link icon-only open-panel"> <i class="fa fa-bars"></i></a>
+        </div>
+      </div>
+    </div>
+    <!-- Scrollable page content-->
+    <div class="page-content" style="margin-top: -70px;">
+        <div class="content-block2" id="content_invoice">
+            <input type="hidden" name="edit_estimate" id="edit_estimate">
+            <div class="list-block inputs-list">
+              <ul>
+
+
+                <div class="card">
+                  <div class="card-content">
+                    <div class="row">
+                      <div class="col-30" style="padding-top: 7px;" id="customers_inv_title">Customers</div>
+                      <div class="col-70">
+                        <input type="hidden" name='client_id' id='client_id' value="">
+                        <a href="#" id='client_name' onclick="PoupClient()" class="button button-round button-fill color-green">Client name</a>
+                      </div>
+                    </div>
+
+                  </div></div>
+
+              <!-- table item -->
+              <div  id='jobBlock'>
+              </div>
+
+              <div  id='consumablesBlock'>
+              </div>
+
+              <div  id='awdwa'>
+              </div>
+
+              <div class="card">
+                <div class="card-content">
+                  <div class="content-block inset">
+                    <div class="row">
+                      <div class="col-50" style="padding-top: 7px;" id="subtotal_title">Subtotal</div>
+                      <div class="col-50" id="sub-total">$0.0</div>
+                    </div>
+                    <div class="row">
+                      <div class="col-50" style="padding-top: 7px;" onclick="PopupDiscount()" id="discount_inv_title">Discount</div>
+                      <div class="col-50" id="discount">0</div>
+                    </div>
+                    <div class="row">
+                      <div class="col-50" style="padding-top: 7px;" id="tax_total_inv_title">Tax</div>
+                      <div class="col-50" id="tax-total">$0.0</div>
+                    </div>
+                    <div class="row">
+                      <div class="col-50" style="padding-top: 7px;" id="total_inv_title">Total</div>
+                      <div class="col-50" id="total"><b>$0.0</b></div>
+                    </div>
+                  </div>
+
+                </div></div>
+
+                <div class="card">
+                  <div class="card-header invheder" id="company_signature_title">Company Signature</div>
+                  <div class="card-content">
+                    <div class="card-content-inner sigPad" id="sigPad" style="width:100%;">
+
+
+                          <div class="row">
+                            <div class="col-70"></div>
+                            <div class="col-30 t_r" style="padding: 7px;"><a class="clearButton">Clear</a></div>
+                          </div>
+                        <div class="sig sigWrapper" style="height:176px">
+                          <center>
+                          <canvas class="pad" width="260" height="170" style="border:1px dotted #C0C0C0;"></canvas>
+                          </center>
+                          <!--<input type="hidden" id="sig_comp" name="output" class="output">-->
+                            <input type="hidden" name="company-signature" class="output">
+                        </div>
+
+
+                      <img src="" id="company_signature" width="100%"></div>
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="card-header invheder" id="client_signature_title">Customer Signature</div>
+                  <div class="card-content">
+                    <div class="card-content-inner sigPad" id="sigPad2" style="width:100%;">
+                          <div class="row">
+                            <div class="col-70"></div>
+                            <div class="col-30 t_r" style="padding: 7px;"><a class="clearButton">Clear</a></div>
+                          </div>
+                        <div class="sig sigWrapper" style="height:176px">
+                          <center>
+                          <canvas class="pad" width="260" height="170" style="border:1px dotted #C0C0C0;"></canvas>
+                          </center>
+                          <!--<input type="hidden" id="sig_comp" name="output" class="output">-->
+                            <input type="hidden" name="client-signature" class="output">
+                        </div>
+                      <img src="" id="client_signature" width="100%"></div>
+                  </div>
+                </div>
+
+                <div class="card">
+                  <div class="card-content">
+                    <li>
+                      <div class="item-content">
+                        <div class="item-media" id="invoice_num_title">Invoice</div>
+                        <div class="item-inner">
+                          <div class="item-title floating-label"></div>
+                          <div class="item-input item-input-field">
+                            <input type="text" name='estimate_id' id='estimate_id' value="#" disabled>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                    <!-- Date -->
+                    <li>
+                      <div class="item-content">
+                        <div class="item-media"><i class="fa fa-calendar"></i></div>
+                        <div class="item-inner not-empty-state">
+                          <div class="item-title floating-label" id="date_issued_title">Date Issued</div>
+                          <div class="item-input item-input-field not-empty-state">
+                            <input type="date" placeholder="Birth day" id="date_issued" name="date_issued" value="2014-04-30" class="not-empty-state">
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                    <!-- Text inputs -->
+                    <li id="po_number_id">
+                      <div class="item-content">
+                        <div class="item-inner">
+                          <div class="item-title floating-label" id="po_number_title">PO Number</div>
+                          <div class="item-input item-input-field">
+                            <input type="text" name='po_number' id='po_number' value="">
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="item-content">
+                        <div class="item-inner">
+                          <div class="item-title floating-label" id="payment_terms_title">Payment terms (days)</div>
+                          <div class="item-input item-input-field">
+                            <input type="text" name='payment_terms' id='payment_terms' value="0">
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                  </div>
+                </div>
+
+
+                <div class="card">
+                  <div class="card-header invheder" id="images_inv_header">Images</div>
+                  <div class="card-content">
+                    <form method="post" id="imagesform" enctype="multipart/form-data"  class="ajax-submit">
+                          <input type="hidden" name="token" id="img_token" >
+                          <input type="hidden" name="doc_num" id="img_doc_num" value="">
+                          <input type="hidden" name="is_estimate" value="0">
+
+                          <div class="item-content">
+                            <div class="item-media fileUpload button button-raised button-fill">
+                              <span class="ico_upload"><i class="fa fa-paperclip" aria-hidden="true"></i></span>
+                              <input id="img_inp" type="file" name="files[]" multiple maxlength="4" accept="image/*" class="upload"/>
+                            </div>
+                            <div class="item-inner">
+                              <div class="item-title floating-label" id="image_upload_lable">Image upload</div>
+                              <div class="item-input item-input-field">
+                                 <input id="file_lectura" readonly type="text" placeholder=""/>
+                              </div>
+                            </div>
+                          </div>
+                            <div class="content-block inset">
+                            <div id="div_container">
+                            </div>
+                          </div>
+                          <br>
+                          <button type="submit" onclick="SaveImages()" class="button button-fill color-green" id="btn_img_save" style="width: 100%;">Save images</button>
+                        </form>
+                        <input type="hidden" name="images_list" id="inv_images_list" value="">
+                        <input type="hidden" name="delete_images_list" id="delete_images_list" value="">
+                  </div>
+                </div>
+                <div class="card" id="loaded_images">
+                  <div class="card-header brsuccess" id="upload_images_list_title">Loaded images</div>
+                  <div class="card-content" id="upload_images_list">
+
+                  </div>
+                </div>
+                <div class="card hiddend" id="deleted_images">
+                  <div class="card-header brwarning" id="list_deletet_images_title">Will be deleted after saving</div>
+                  <div class="card-content" id="list_deletet_images">
+
+                  </div>
+                </div>
+
+
+                <div class="card">
+                  <div class="card-content">
+                    <li>
+                      <div class="item-content">
+                        <div class="item-inner not-empty-state">
+                          <div class="item-title floating-label" id="note_inv_title">note</div>
+                          <div class="item-input item-input-field">
+                            <textarea class="resizable" name="note" id="note"></textarea>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                </div></div>
+
+
+                <div class="card" id="submit">
+                  <div class="card-content">
+                    <div class="card-content-inner t_r">
+                      <p class="content-block">
+                      <button type="submit" id="submit_bt_invoice" class="button button-fill color-green" style="width: 100%" onclick="SaveInvoice(1)">Save changes</button>
+                    </p></div>
+                  </div>
+                </div>
+              <!-- end table item -->
+            </ul>
+    </div>
+  </div>
+</div>
+</div></div>
