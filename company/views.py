@@ -8,7 +8,7 @@ from django.http import JsonResponse
 from pyexcel_xlsx import get_data, save_data
 import json
 import logging
-from parce.settings import BASE_DIR
+from project.settings import BASE_DIR
 from company.models import Houzz , Eshop, Myremont, Watch, WatchPrice, PriceAttr
 from django.views.decorators.csrf import csrf_exempt
 from django.db.models import Q

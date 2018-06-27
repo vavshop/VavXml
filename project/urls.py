@@ -1,9 +1,13 @@
-
-from django.conf.urls import url
+from django.conf import settings
+from django.conf.urls import include, url
 from django.contrib import admin
 from company import views
 
+from welcome.views import index, health
+
 urlpatterns = [
+    url(r'^health$', health),
+    url(r'^admin/', include(admin.site.urls)),
 
     url(r'^set_houzz$', views.set_houzz),
     url(r'^houzz.json$', views.houzz_json),
@@ -44,15 +48,12 @@ urlpatterns = [
 
 
 
-
-
-
-
-
-
-
-
-
-
     url(r'^$', views.main, name='index'),
 ]
+
+
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns = [
+        url(r'^__debug__/', include(debug_toolbar.urls)),
+    ] + urlpatterns
