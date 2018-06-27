@@ -1,0 +1,68 @@
+<!-- We don't need full layout here, because this page will be parsed with Ajax-->
+<div class="pages">
+  <!-- Page, data-page contains page name-->
+  <div data-page="support" class="page">
+    <!-- Top Navbar-->
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="left">
+          <!-- Right link contains only icon - additional "icon-only" class-->
+          <!-- <a href="pages/new_client.html" class="link icon-only"> <i class="fa fa-plus"></i></a> -->
+        </div>
+        <div class="center sliding" id="title_support_name">Support</div>
+        <div class="right">
+          <!-- Right link contains only icon - additional "icon-only" class-->
+          <a href="#" class="link icon-only open-panel"> <i class="fa fa-bars"></i></a>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Scrollable page content-->
+    <div class="page-content" style="padding-top: 20px;">
+      <div class="list-block inputs-list">
+        <div class="card">
+          <div class="card-content">
+            <ul>
+              <form method="post" id="support-form" action="/api/support/mail" class="ajax-submit">
+              <li>
+                <div class="item-content">
+                  <div class="item-media"><i class="fa fa-envelope-o"></i></div>
+                  <div class="item-inner">
+                    <div class="item-title floating-label" id="support_email_title">E-mail</div>
+                    <div class="item-input item-input-field">
+                      <input name='email' type="email" maxlength="200" placeholder="" class="" required>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="item-content">
+                  <div class="item-inner">
+                    <div class="item-title floating-label" id="support_subject_title">Message subject</div>
+                    <div class="item-input item-input-field">
+                      <input name='tema' type="text" maxlength="30" placeholder="" class="" required>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li class="align-top">
+                <div class="item-content">
+                  <div class="item-inner">
+                    <div class="item-title floating-label" id="support_message_title">Message</div>
+                    <div class="item-input item-input-field">
+                      <textarea name="message" class="resizable" required></textarea>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <p class="buttons-row"><button type="submit" id="support_sand_button_value" class="button button-raised button-fill bg-green"><i class="fa fa-envelope-square" aria-hidden="true"></i> Send</button></p>
+            </form>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

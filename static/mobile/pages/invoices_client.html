@@ -1,0 +1,51 @@
+<!-- We don't need full layout here, because this page will be parsed with Ajax-->
+<div class="pages">
+  <!-- Page, data-page contains page name-->
+  <div data-page="invoices_client" class="page">
+    <!-- Top Navbar-->
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="left"><a href="#" class="back link icon-only"> <i class="icon icon-back"></i></a></div>
+        <div class="center sliding" id="invoices_client_title_name">Invoices</div>
+        <div class="right">
+          <!-- Right link contains only icon - additional "icon-only" class-->
+          <a href="#" class="link icon-only open-panel"> <i class="fa fa-bars"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Floating Action Button -->
+    <a href="#" id="float_action_inv_client" onclick="Invoceload('', 'New', 1)" class="floating-button color-pink" >
+      <i class="icon icon-plus"></i>
+    </a>
+
+    <!-- Scrollable page content-->
+    <div class="page-content" style="padding-top: 20px;">
+
+      <div class="list-block media-list">
+        <div class="card">
+          <div class="card-content">
+            <ul id='invoices_client' class='invoices'>
+              <table id="invoices_table" class="display nowrap" cellspacing="0" width="100%">
+                <thead>
+                  <tr><th></th></tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>
+                          <span class="pull-right"></span>
+                          <span class="pull-right"></span>
+                        </th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                </tbody>
+              </table>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

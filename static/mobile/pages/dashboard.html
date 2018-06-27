@@ -1,0 +1,203 @@
+<!-- We don't need full layout here, because this page will be parsed with Ajax-->
+<div class="pages">
+  <!-- Page, data-page contains page name-->
+  <div data-page="dashboard" class="page">
+    <!-- Top Navbar-->
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="left">
+          <!-- Right link contains only icon - additional "icon-only" class-->
+          <!-- <a href="pages/new_client.html" class="link icon-only"> <i class="fa fa-plus"></i></a> -->
+        </div>
+        <div class="center sliding" id="dashboard_title">Dashboard</div>
+        <div class="right">
+          <!-- Right link contains only icon - additional "icon-only" class-->
+          <a href="#" class="link icon-only open-panel"> <i class="fa fa-bars"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Floating Action Button
+    <a href="#" onclick="NewItemWork()" class="floating-button color-pink" >
+      <i class="icon icon-plus"></i>
+    </a>-->
+
+    <!-- Scrollable page content-->
+    <div class="page-content" style="padding-top: 30px;">
+      <div class="list-block media-list" id="dashboard_page_content">
+        <div class="card">
+          <div class="card-content">
+            <!-- График Revenue -->
+            <div class="hp_info_3b_box_revenue_wp">
+                <!-- --><div class="box hp_info_3b_box" id="hp_info_3b_revenue">
+                      <div class="header" id="dashboard_payments_chart_title">Payments</div>
+                    <div class="pays hiddend">
+                        <span><i class="material-icons">attach_money</i> 0,00 <br></span>
+                        <span class="bad"><i class="material-icons">arrow_drop_up</i> 0.00%</span>
+                        <!-- ///////////////////////////////////////////////
+                        ///// Если значение хуже - ставим класс "bad" //-->
+                    </div>
+                    <div class="switch_box hiddend">
+                        <span class="month active">Month</span>
+                        <button class="switch revenue-switch"></button>
+                        <span class="day">Day</span>
+
+                    </div>
+                    <!--  MORRIS  -->
+                    <div class="chart" id="revenue-chart" style="height: 180px;"></div>
+                    <!-- /.box-body -->
+                    <!--  /MORRIS  -->
+                </div> <!-- /hp_info_3b_revenue  -->
+            </div>
+            <!-- end График Revenue -->
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-content">
+            <!-- График Payments  -->
+            <div class="hp_info_3b_box_pays_wp">
+            <div class="hp_info_3b_box_in_wp">
+                <div class="box hp_info_3b_box" id="hp_info_3b_payments">
+                    <div class="header" id="dashboard_invoices_bux_chart_title">Invoices $</div>
+                    <div class="subheader" id="dashboard_invoices_bux_chart_title_after"></div>
+                    <div class="chart" id="payments-bar" style="height: 180px;"></div>
+                </div>
+            </div>
+          </div>
+          </div>
+        </div>
+
+      <div class="card">
+        <div class="card-content">
+          <div class="hp_info_3b_box_pays_wp">
+          <!-- График Invoices
+          --><div class="hp_info_3b_box_in_wp">
+          <div class="box hp_info_3b_box" id="hp_info_3b_invoices">
+              <div class="header" id="dashboard_invoices_chart_title">Invoices</div>
+              <div class="subheader" id="dashboard_invoices_chart_after"></div>
+              <div class="chart" id="invoices-bar" style="height: 180px;"></div>
+          </div>
+          </div>
+        </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-content info_4b_row">
+          <div class="info_4b_box_wp">
+                  <div class="info_4b_box info_4b_box_green">
+                      <div class="header"><i class="fa fa-user-plus" aria-hidden="true"></i> <span id="dashboard_new_customer_title">New customers</span></div>
+                      <div class="counter"><span id="dashboard_new_customer"></span></div>
+                      <div class="from" id="dashboard_new_customer_end"></div>
+                  </div>
+              <!-- ///////////////////////////////////////////////
+              ///// Если значение позитивно - ставим класс "good".
+              ///// Если значение хуже - ставим класс "bad" //-->
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-content info_4b_row">
+          <!-- block 2-->
+          <div class="info_4b_box_wp ">
+              <div class="info_4b_box info_4b_box_pink">
+                  <div class="header"><i class="fa fa-file-text-o" aria-hidden="true"></i> <span id="dashboard_new_invoices_title">New invoices $</span></div>
+                  <div class="counter"><span id="dashboard_new_invoices"><i class="material-icons">attach_money</i> </span></div>
+                  <div class="from" id="dashboard_new_invoices_end"></div>
+              </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-content info_4b_row">
+          <!-- block 3
+          --><div class="info_4b_box_wp ">
+              <div class="info_4b_box info_4b_box_gray">
+                  <div class="header"><i class="fa fa-line-chart" aria-hidden="true"></i> <span id="dashboard_closed_tasks_title">Closed tasks</span></div>
+                  <div class="counter"><span id="dashboard_closed_tasks"></span></div>
+                  <div class="from" id="dashboard_closed_tasks_end"></div>
+              </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-content info_4b_row">
+          <!-- block 4
+          --><div class="info_4b_box_wp ">
+              <div class="info_4b_box info_4b_box_purpur">
+                  <div class="header"><i class="fa fa-usd" aria-hidden="true"></i> <span id="dashboard_payments_t4_title">Payments</span></div>
+                  <div class="counter"><span id="dashboard_payments_t4"><i class="material-icons">attach_money</i> </span></div>
+                  <div class="from" id="dashboard_payments_t4_end"></div>
+              </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="list-block media-list">
+    <div class="card">
+      <div class="card-header" id="payments_dashboard_table_head">Last Payments</div>
+      <div class="card-content">
+        <div class="">
+          <ul>
+          <table id="payments_dashboard_table" class="display" cellspacing="0" width="100%">
+          <thead>
+              <tr>
+                  <th></th>
+
+              </tr>
+          </thead>
+          <tfoot>
+              <tr>
+                  <th>
+                    <span class="pull-right"></span>
+                    <span class="pull-right"></span>
+                  </th>
+              </tr>
+          </tfoot>
+          <tbody>
+          </tbody>
+      </table>
+    </ul>
+         </div>
+      </div>
+    </div>
+    <!-- ul -->
+
+    <div class="card">
+      <div class="card-header" id="invoices_dashboard_table_head">Last invoices</div>
+      <div class="card-content">
+        <div class="">
+          <ul>
+          <table id="invoices_dashboard_table" class="display" cellspacing="0" width="100%">
+          <thead>
+              <tr>
+                  <th></th>
+
+              </tr>
+          </thead>
+          <tfoot>
+              <tr>
+                  <th>
+                    <span class="pull-right"></span>
+                    <span class="pull-right"></span>
+                  </th>
+              </tr>
+          </tfoot>
+          <tbody>
+          </tbody>
+      </table>
+    </ul>
+         </div>
+      </div>
+    </div>
+    <!-- ul -->
+      </div>
+
+    </div>
+    </div>
+  </div>
+</div>

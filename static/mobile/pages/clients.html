@@ -1,0 +1,62 @@
+
+<!-- We don't need full layout here, because this page will be parsed with Ajax-->
+<div class="pages">
+  <!-- Page, data-page contains page name-->
+  <div data-page="clients" class="page">
+    <!-- Top Navbar-->
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="left">
+          <!-- Right link contains only icon - additional "icon-only" class-->
+          <!-- <a href="pages/new_client.html" class="link icon-only"> <i class="fa fa-plus"></i></a> -->
+        </div>
+        <div class="center sliding" id="customers_page_title">Customers</div>
+        <div class="right">
+          <!-- Right link contains only icon - additional "icon-only" class-->
+          <a href="#" class="link icon-only open-panel"> <i class="fa fa-bars"></i></a>
+        </div>
+      </div>
+    </div>
+    <!-- Search Bar -->
+    <form data-search-list=".list-block-search" data-search-in=".item-title" class="searchbar searchbar-init">
+      <div class="searchbar-input">
+        <input type="search" id="search_bar_placehoder" placeholder="Search"><a href="#" class="searchbar-clear"></a>
+      </div><a href="#" class="searchbar-cancel">Cancel</a>
+    </form>
+
+    <!-- Floating Action Button -->
+    <a href="pages/new_client.html" onclick='myApp.mainView.loadPage(pages_url+"/pages/new_client.html");' class="floating-button color-pink">
+      <i class="icon icon-plus"></i>
+    </a>
+
+    <!-- Search Bar overlay -->
+    <div class="searchbar-overlay"></div>
+
+    <!-- Scrollable page content-->
+    <div class="page-content" style="padding-top: 75px;">
+
+      <!-- This block will be displayed if nothing found -->
+      <div class="content-block searchbar-not-found">
+        <div class="content-block-inner" id="text_nothing_found">Nothing found</div>
+      </div>
+
+      <div class="list-block inputs-list">
+        <ul>
+          <li>
+            <div class="item-content">
+              <div class="item-inner">
+                <a href="#" onclick="GroupCustomers()" id="group_customers_btn" class="button button-fill color-green"><i class="fa fa-address-card-o" aria-hidden="true"></i> Groups Customers</a>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="list-block media-list list-block-search searchbar-found">
+        <ul id='clients'>
+
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

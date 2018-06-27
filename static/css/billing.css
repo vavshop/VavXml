@@ -1,0 +1,23 @@
+td.details-control {
+    background: url('/static/css/images/details_open.png') no-repeat center center;
+    cursor: pointer;
+}
+tr.shown td.details-control {
+    background: url('/static/css/images/details_close.png') no-repeat center center;
+}
+
+.modal {
+  padding-top: 50px;
+}
+.bgcolorst{
+  background-color: #ffd9b3;
+}
+.bgcolorst:hover{
+  background-color: #ffe6cc!important;
+}
+.langdiv{
+  padding: 10px;
+  float: left;
+  display: inline-block!important;
+
+}

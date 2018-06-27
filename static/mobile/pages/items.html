@@ -1,0 +1,53 @@
+<!-- We don't need full layout here, because this page will be parsed with Ajax-->
+<div class="pages">
+  <!-- Page, data-page contains page name-->
+  <div data-page="items" class="page">
+    <!-- Top Navbar-->
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="left">
+          <!-- Right link contains only icon - additional "icon-only" class-->
+          <!-- <a href="pages/new_client.html" class="link icon-only"> <i class="fa fa-plus"></i></a> -->
+        </div>
+        <div class="center sliding" id="title_item_name">Items</div>
+        <div class="right">
+          <!-- Right link contains only icon - additional "icon-only" class-->
+          <a href="#" class="link icon-only open-panel"> <i class="fa fa-bars"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Floating Action Button -->
+    <a href="#" onclick="NewItemWork()" class="floating-button color-pink" >
+      <i class="icon icon-plus"></i>
+    </a>
+
+    <!-- Scrollable page content-->
+    <div class="page-content" style="padding: 20px 0 45px 0;">
+      <div class="list-block media-list">
+        <div class="card">
+          <div class="card-content">
+            <ul id='works' class='works'>
+              <table id="works_table" class="display" cellspacing="0" width="100%">
+                <thead>
+                  <tr><th></th></tr>
+                </thead>
+                <tbody>
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <th>
+                      <span class="pull-right"></span>
+                      <span class="pull-right"></span>
+                    </th>
+                  </tr>
+                </tfoot>
+              </table>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
